@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIC Sabaki Church</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#dc2626',
+            'primary-dark': '#b91c1c',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hero-section {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Salvation%20-%20Free%20Bootstrap%204%20Template%20by%20Colorlib%20-%20Google%20Chrome%2005_08_2025%2022_38_15-QRocNy1dWydAoT0o4oGZULamiRnFNX.png');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .church-image {
+      background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Salvation%20-%20Free%20Bootstrap%204%20Template%20by%20Colorlib%20-%20Google%20Chrome%2005_08_2025%2022_38_30-gc1F9PZwWtvCX0cLsMC2PeKxR5uTKW.png');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .sermon-image {
+      background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Salvation%20-%20Free%20Bootstrap%204%20Template%20by%20Colorlib%20-%20Google%20Chrome%2005_08_2025%2022_38_45-Q0LTc50cSw8QQnLXC5izsAYVBj9SXQ.png');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .slide-up {
+      transform: translateY(50px);
+      opacity: 0;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+    
+    .slide-up.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .ministry-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .ministry-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Header -->
+  <header class="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto rounded-xl bg-black/50 backdrop-filter backdrop-blur-lg transition-all duration-300" id="header">
+    <div class="container mx-auto px-4">
+      <!-- Top bar -->
+      <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-map-marker-alt w-4 h-4"></i>
+          <span>Along Church Road, Sabaki, Athi-River, Kenya</span>
+        </div>
+        <div class="flex gap-4">
+          <i class="fab fa-facebook w-4 h-4 cursor-pointer hover:text-red-400"></i>
+          <i class="fab fa-twitter w-4 h-4 cursor-pointer hover:text-red-400"></i>
+          <i class="fab fa-instagram w-4 h-4 cursor-pointer hover:text-red-400"></i>
+        </div>
+      </div>
+
+      <!-- Main navigation -->
+      <nav class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <div class="h-14 w-14 bg-red-600 rounded-full mr-3 border-2 border-white flex items-center justify-center">
+            <i class="fas fa-church text-white text-xl"></i>
+          </div>
+          <span class="text-white text-2xl font-bold">AIC SABAKI</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="text-red-400 hover:text-white transition-colors">HOME</a>
+          <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+          <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
+          <a href="sermons.html" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+          <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
+          <a href="blog.html" class="text-white hover:text-red-400 transition-colors">BLOG</a>
+          <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT</a>
+          <a href="login.html" class="text-white hover:text-red-400 transition-colors">
+            <i class="fas fa-user"></i>
+          </a>
+          <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">DONATE</button>
+        </div>
+        <button class="md:hidden text-white" id="mobile-menu-button">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section relative min-h-screen flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4" data-aos="fade-up" data-aos-duration="1000">
+      <p class="text-red-400 text-sm font-semibold mb-4 tracking-wide">TRANSFORMING LIVES</p>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 slide-up">TOTAL SURRENDER TO GOD</h1>
+      <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto slide-up">
+        Welcome to AIC Sabaki Church, where faith meets community. Join us as we grow together in Christ and serve our community with love.
+      </p>
+      <button class="bg-yellow-800 hover:bg-yellow-700 text-white px-8 py-3 text-lg rounded slide-up" id="volunteer-btn">
+        BECOME A VOLUNTEER
+      </button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-red-400 text-sm font-semibold mb-4 tracking-wide" data-aos="fade-up">WELCOME TO AIC SABAKI CHURCH</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12" data-aos="fade-up" data-aos-delay="100">CONNECT, GROW AND SERVE WITH US</h2>
+      <div class="max-w-4xl mx-auto">
+        <p class="text-gray-700 text-lg leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="200">
+          Welcome to AIC Sabaki Church, where faith meets community. We are committed to building strong relationships with God and each other.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="300">
+          Join us as we grow together in faith, serve our community, and spread the love of Christ to all.
+        </p>
+        <a href="about.html" class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded inline-block" data-aos="fade-up" data-aos-delay="400">LEARN MORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ministries Section -->
+  <section id="ministries" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <p class="text-red-400 text-sm text-center font-semibold mb-4 tracking-wide" data-aos="fade-up">OUR MINISTRIES</p>
+      <h2 class="text-3xl md:text-4xl text-center font-bold text-gray-900 mb-16" data-aos="fade-up" data-aos-delay="100">SERVING GOD TOGETHER</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Sunday School -->
+        <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border" data-aos="fade-up" data-aos-delay="100">
+          <div class="relative h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+            <i class="fas fa-book-open text-6xl text-white"></i>
+            <div class="absolute bottom-0 left-0 right-0 bg-black/30 text-white px-6 py-3 text-center">
+              <div class="text-xl font-bold">Sunday School</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Teaching children and adults the fundamentals of Christian faith
+            </h3>
+            <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1">
+              Learn More
+            </a>
+          </div>
+        </div>
+
+        <!-- Youth Ministry -->
+        <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border" data-aos="fade-up" data-aos-delay="200">
+          <div class="relative h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+            <i class="fas fa-users text-6xl text-white"></i>
+            <div class="absolute bottom-0 left-0 right-0 bg-black/30 text-white px-6 py-3 text-center">
+              <div class="text-xl font-bold">Youth Ministry</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Empowering young lives - "Do not let anyone look down on you because you are young" - 1 Timothy 4:12
+            </h3>
+            <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1">
+              Learn More
+            </a>
+          </div>
+        </div>
+
+        <!-- Women Fellowship -->
+        <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border" data-aos="fade-up" data-aos-delay="300">
+          <div class="relative h-64 bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+            <i class="fas fa-heart text-6xl text-white"></i>
+            <div class="absolute bottom-0 left-0 right-0 bg-black/30 text-white px-6 py-3 text-center">
+              <div class="text-xl font-bold">Women Fellowship</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Christian Women Fellowship (CWF) - Empowering women in faith and fellowship
+            </h3>
+            <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1">
+              Learn More
+            </a>
+          </div>
+        </div>
+
+        <!-- Men Fellowship -->
+        <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border" data-aos="fade-up" data-aos-delay="400">
+          <div class="relative h-64 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+            <i class="fas fa-shield-alt text-6xl text-white"></i>
+            <div class="absolute bottom-0 left-0 right-0 bg-black/30 text-white px-6 py-3 text-center">
+              <div class="text-xl font-bold">Men Fellowship</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Christian Men Fellowship (CMF) - Building strong Christian men and leaders
+            </h3>
+            <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1">
+              Learn More
+            </a>
+          </div>
+        </div>
+
+        <!-- Music Ministry -->
+        <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border" data-aos="fade-up" data-aos-delay="500">
+          <div class="relative h-64 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+            <i class="fas fa-music text-6xl text-white"></i>
+            <div class="absolute bottom-0 left-0 right-0 bg-black/30 text-white px-6 py-3 text-center">
+              <div class="text-xl font-bold">Music Ministry</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Worship through music and praise - Lifting hearts to God through song
+            </h3>
+            <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1">
+              Learn More
+            </a>
+          </div>
+        </div>
+
+        <!-- Prayer Ministry -->
+        <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border" data-aos="fade-up" data-aos-delay="600">
+          <div class="relative h-64 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
+            <i class="fas fa-praying-hands text-6xl text-white"></i>
+            <div class="absolute bottom-0 left-0 right-0 bg-black/30 text-white px-6 py-3 text-center">
+              <div class="text-xl font-bold">Prayer Ministry</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              Intercessory prayer and spiritual warfare - Standing in the gap through prayer
+            </h3>
+            <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1">
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sermons Section -->
+  <section id="sermons" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-red-400 text-sm font-semibold mb-4 tracking-wide" data-aos="fade-up">OUR SERMONS</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-16" data-aos="fade-up" data-aos-delay="100">WATCH AND LISTEN TO OUR SERMONS</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div class="relative sermon-image h-80 rounded-lg" data-aos="fade-right">
+          <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <button class="bg-white text-gray-900 hover:bg-gray-100 rounded-full p-4 sermon-play-btn">
+              <i class="fas fa-play text-2xl"></i>
+            </button>
+          </div>
+        </div>
+        <div class="text-left" data-aos="fade-left">
+          <h3 class="text-2xl md:text-3xl font-bold text-red-600 mb-4">
+            God Wants To Do A New Thing In Your Life
+          </h3>
+          <p class="text-gray-600 mb-6">
+            Speaker: <span class="text-red-600 font-semibold">Pastor John Kamau</span>
+          </p>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            Join us as we explore God's plan for transformation in our lives. Discover how faith can lead to breakthrough and renewal in every aspect of your journey.
+          </p>
+          <a href="sermons.html" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded inline-block">
+            View All Sermons
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="bg-red-600 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-sm font-semibold mb-4 tracking-wide" data-aos="fade-up">TESTIMONY</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-16" data-aos="fade-up" data-aos-delay="100">TRANSFORMED LIVES</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="bg-white text-gray-900 rounded-lg p-8" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-6xl text-red-600 mb-4">"</div>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            AIC Sabaki has been my spiritual home for over 10 years. The fellowship and teaching have strengthened my faith immensely.
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-15 h-15 bg-gray-300 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-2xl"></i>
+            </div>
+            <div class="text-left">
+              <h4 class="font-bold">Mary Wanjiku</h4>
+              <p class="text-gray-600 text-sm">Church Member</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white text-gray-900 rounded-lg p-8" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-6xl text-red-600 mb-4">"</div>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            The youth ministry here has been instrumental in shaping my Christian walk. I've found purpose and direction.
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-15 h-15 bg-gray-300 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-2xl"></i>
+            </div>
+            <div class="text-left">
+              <h4 class="font-bold">David Kiprotich</h4>
+              <p class="text-gray-600 text-sm">Youth Leader</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white text-gray-900 rounded-lg p-8" data-aos="fade-up" data-aos-delay="400">
+          <div class="text-6xl text-red-600 mb-4">"</div>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            The love and support I've received from this church family during difficult times has been overwhelming.
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-15 h-15 bg-gray-300 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-2xl"></i>
+            </div>
+            <div class="text-left">
+              <h4 class="font-bold">Grace Muthoni</h4>
+              <p class="text-gray-600 text-sm">CWF Member</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="text-2xl font-bold text-red-600">AIC SABAKI</span>
+          </div>
+          <p class="text-gray-400 mb-4">
+            Building faith, fostering community, and serving God together.
+          </p>
+          <div class="flex gap-4">
+            <i class="fab fa-facebook cursor-pointer hover:text-red-400"></i>
+            <i class="fab fa-twitter cursor-pointer hover:text-red-400"></i>
+            <i class="fab fa-instagram cursor-pointer hover:text-red-400"></i>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="sermons.html" class="hover:text-white transition-colors">Sermons</a></li>
+            <li><a href="events.html" class="hover:text-white transition-colors">Events</a></li>
+            <li><a href="#ministries" class="hover:text-white transition-colors">Ministries</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">Service Times</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li>Sunday: 9:00 AM & 11:00 AM</li>
+            <li>Wednesday: 7:00 PM</li>
+            <li>Friday: 7:30 PM</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">Contact Info</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li>Along Church Road, Sabaki</li>
+            <li>Athi-River, Kenya</li>
+            <li>Phone: +254 123 456 789</li>
+            <li>Email: info@aicsabaki.church</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2024 AIC Sabaki Church. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', () => {
+        // Mobile menu implementation
+        console.log('Mobile menu clicked');
+      });
+    }
+
+    // Animate elements when they come into view
+    const animateElements = () => {
+      const elements = document.querySelectorAll('.slide-up');
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementPosition < windowHeight - 100) {
+          element.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('load', animateElements);
+    window.addEventListener('scroll', animateElements);
+
+    // Volunteer button pulse animation
+    const volunteerBtn = document.getElementById('volunteer-btn');
+    if (volunteerBtn) {
+      setInterval(() => {
+        volunteerBtn.classList.add('animate-pulse');
+        setTimeout(() => {
+          volunteerBtn.classList.remove('animate-pulse');
+        }, 1000);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
