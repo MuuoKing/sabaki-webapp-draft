@@ -104,81 +104,83 @@
   <!-- Header -->
   <header class="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto rounded-xl bg-black/50 backdrop-filter backdrop-blur-lg transition-all duration-300" id="header">
     <div class="container mx-auto px-4">
-      <!-- Top bar -->
-      <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
-        <div class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
-            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          <span>Along Church Road, Sabaki, Athi-River, Kenya</span>
-        </div>
-        <div class="flex gap-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
-            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
-            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Main navigation -->
-      <nav class="flex justify-between items-center py-4">
-        <div class="flex items-center">
-            <!-- Added image before the text -->
-            <img 
-              src="aic.png" 
-              alt="AIC Sabaki Logo"
-              class="h-14 w-14 object-cover rounded-full mr-3 border-2 border-white"
-            >
-            <span class="text-white text-2xl font-bold">AIC SABAKI</span>
+        <!-- Top bar -->
+        <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
+          <div class="flex items-center">
+              <!-- Made logo and text smaller on mobile -->
+              <img 
+                src="aic.png" 
+                alt="AIC Sabaki Logo"
+                class="h-14 w-14 object-cover rounded-full mr-3"
+              >
+              <span class="text-white text-2xl font-bold">AIC SABAKI</span>
+            </div>
+          <!-- Made location text smaller and hide on very small screens -->
+          <div class="hidden sm:flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 md:w-4 md:h-4">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="text-xs md:text-sm">Along Church Road, Sabaki, Athi-River, Kenya</span>
           </div>
-        <div class="hidden md:flex items-center gap-3">
-          <a href="index.html" class="text-red-400 hover:text-white transition-colors">HOME</a>
-          <a href="#about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
-          <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
-          <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
-          <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
-          <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
-          <a href="#contact" class="text-white hover:text-red-400 transition-colors">CONTACT</a>
-          <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERING</button>
+          
         </div>
-        <button class="md:hidden text-white" id="mobile-menu-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" x2="21" y1="6" y2="6"></line>
-            <line x1="3" x2="21" y1="12" y2="12"></line>
-            <line x1="3" x2="21" y1="18" y2="18"></line>
-          </svg>
-        </button>
-      </nav>
-      
-      <!-- Mobile menu (hidden by default) -->
-      <div class="md:hidden hidden bg-gray-900 rounded-lg p-4 absolute left-0 right-0 mt-2" id="mobile-menu">
-        <div class="flex flex-col gap-4">
-          <a href="#home" class="text-red-400 hover:text-white transition-colors">HOME</a>
-          <a href="#about" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
-          <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
-          <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
-          <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
-          <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
-          <a href="#contact" class="text-white hover:text-red-400 transition-colors">CONTACT</a>
-          <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERINGS</button>
+  
+        <!-- Main navigation -->
+        <nav class="flex justify-between items-center py-4">
+          <div class="flex gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>
+            </div>
+          <div class="hidden md:flex items-center gap-3">
+            <a href="index.html" class="text-red-400 hover:text-white transition-colors">HOME</a>
+            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+            <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
+            <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+            <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
+            <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
+            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded">OFFERING</button>
+          </div>
+          <button class="md:hidden text-white" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" x2="21" y1="6" y2="6"></line>
+              <line x1="3" x2="21" y1="12" y2="12"></line>
+              <line x1="3" x2="21" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </nav>
+        
+        <!-- Mobile menu (hidden by default) -->
+        <div class="md:hidden hidden bg-black/50 backdrop-filter backdrop-blur-lg rounded-xl p-4 absolute left-0 right-0 mt-2 border border-white/20 transition-all duration-300" id="mobile-menu">
+          <div class="flex flex-col gap-4">
+            <a href="index.html" class="text-red-400 hover:white transition-colors">HOME</a>
+            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+            <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
+            <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+            <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
+            <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
+            <a href="contact.html" class="text-white hover:text-red-400  transition-colors">CONTACT US</a>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERINGS</button>
+          </div>
         </div>
       </div>
-    </div>
   </header>
 
   <!-- Hero Section -->
   <section id="home" class="hero-section relative min-h-screen flex items-center justify-center">
     <div class="absolute inset-0 bg-black/50"></div>
     <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4" data-aos="fade-up" data-aos-duration="1000">
-      <p class="text-red-400 text-sm font-semibold mb-4 tracking-wide">TRANSFORMING LIVE</p>
+      <p class="text-red-400 text-sm font-semibold mb-4 tracking-wide">TRANSFORMING LIVES</p>
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 slide-up">TOTAL SURRENDER TO GOD</h1>
       <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto slide-up">
         a verse goes here.

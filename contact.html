@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Events - AIC Sabaki</title>
+  <title>Contact Us - AIC Sabaki</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- AOS Animation Library -->
@@ -27,38 +27,6 @@
       background-position: center;
     }
     
-    .event-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .event-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-    
-    .event-image-1 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-2 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-3 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-4 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-5 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-6 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
   </style>
 </head>
 <body class="font-sans">
@@ -68,7 +36,7 @@
         <!-- Top bar -->
         <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
           <div class="flex items-center">
-              <!-- Made logo and text smaller on mobile -->
+              <!-- logo and text smaller on mobile -->
               <img 
                 src="aic.png" 
                 alt="AIC Sabaki Logo"
@@ -76,7 +44,7 @@
               >
               <span class="text-white text-2xl font-bold">AIC SABAKI</span>
             </div>
-          <!-- Made location text smaller and hide on very small screens -->
+          <!--  location text smaller and hide on very small screens -->
           <div class="hidden sm:flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 md:w-4 md:h-4">
               <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
@@ -107,9 +75,9 @@
             <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
             <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
             <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
-            <a href="events.html" class="text-red-400 hover:text-white transition-colors">EVENTS</a>
+            <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
             <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
-            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <a href="contact.html" class="text-red-400 hover:text-white transition-colors">CONTACT US</a>
             <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded">OFFERING</button>
           </div>
           <button class="md:hidden text-white" id="mobile-menu-button">
@@ -121,6 +89,7 @@
           </button>
         </nav>
         
+
         <!-- Mobile menu (hidden by default) -->
         <div class="md:hidden hidden bg-black/50 backdrop-filter backdrop-blur-lg rounded-xl p-4 absolute left-0 right-0 mt-2 border border-white/20 transition-all duration-300" id="mobile-menu">
           <div class="flex flex-col gap-4">
@@ -128,16 +97,20 @@
             <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
             <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
             <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
-            <a href="events.html" class="text-red-400 hover:text-white transition-colors">EVENTS</a>
+            <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
             <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
-            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <a href="contact.html" class="text-red-400 hover:text-white transition-colors">CONTACT US</a>
             <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERINGS</button>
           </div>
         </div>
       </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Added JavaScript for mobile menu toggle and scroll behavior -->
+
+
+
+  <!-- Contact Hero Section -->
   <section class="hero-section relative py-32">
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 text-center text-white">
@@ -145,14 +118,14 @@
         <!-- Breadcrumb -->
         <nav class="mb-8" data-aos="fade-up">
           <div class="flex justify-center items-center gap-2 text-sm">
-            <a href="home.html" class="text-red-400 hover:text-white transition-colors">Home</a>
+              <a href="index.html" class="text-red-400 hover:text-white transition-colors">Home</a>
             <span class="text-gray-300">></span>
-            <span class="text-white">Events</span>
+            <span class="text-white">Contact</span>
           </div>
         </nav>
         
         <!-- Page Title -->
-        <h1 class="text-5xl md:text-6xl font-bold mb-8" data-aos="fade-up" data-aos-delay="200">Events</h1>
+        <h1 class="text-5xl md:text-6xl font-bold mb-8" data-aos="fade-up" data-aos-delay="200">Contact</h1>
         
         <!-- Church Logo -->
         <div class="flex justify-center" data-aos="fade-up" data-aos-delay="400">
@@ -166,149 +139,152 @@
     </div>
   </section>
 
-  <!-- Events Grid Section -->
-  <section class="py-20 bg-gray-50">
+  <!-- Contact Cards Section -->
+  <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto" data-aos="fade-up">
         
-        
-        <!-- Event Card 1 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
-            <!-- Background container with blurred overlay -->
-            <div class="relative h-64 bg-cover bg-center" style="background-image: url('event2.jpg')">
-              <!-- Blurred overlay for text readability -->
-              <div class="absolute inset-0 bg-black bg-opacity-30 "></div>
-              
-              <!-- Location pin -->
-              <!--<div class="absolute top-4 left-4 z-10">
-                <div class="bg-red-600 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-              </div>-->
-              
-              <!-- Date/time  -->
-              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-                <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-                <div class="text-xs drop-shadow-md">9 am</div>
-              </div>
-            </div>
-            
-           
-            <div class="p-6 relative">
-              <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-              <div class="relative z-10">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                  Event: Spiritually Reborn & Healthy Lives
-                </h3>
-                <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">
-                  Event Details
-                </a>
-              </div>
-            </div>
+        <!-- Office Card -->
+        <div class="bg-red-600 text-white p-8 rounded-lg text-center">
+          <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">OFFICE LOCATION</h3>
+          <p class="text-sm opacity-90">Along Church Road, Sabaki</p>
+          <p class="text-sm opacity-90">Athi River, Kenya</p>
         </div>
 
-        <!-- Event Card 2 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
-          <!-- Background container with blurred overlay -->
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('event1.jpg')">
-            <!-- Blurred overlay for text readability -->
-            <div class="absolute inset-0 bg-black bg-opacity-30 "></div>
-            
-            <!-- Location pin -->
-            <!--<div class="absolute top-4 left-4 z-10">
-              <div class="bg-red-600 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-            </div>-->
-            
-            <!-- Date/time with improved visibility -->
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-              <div class="text-xs drop-shadow-md">9 am</div>
-            </div>
+        <!-- Phone Numbers Card -->
+        <div class="bg-slate-700 text-white p-8 rounded-lg text-center">
+          <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
           </div>
-          
-          <!-- Content area with improved text visibility -->
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Event: Spiritually Reborn & Healthy Lives
-              </h3>
-              <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">
-                Event Details
-              </a>
-            </div>
-          </div>
-      </div>
-
-        <!-- Event Card 2 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
-          <!-- Background container with blurred overlay -->
-          <div class="relative h-64 bg-contain bg-center" style="background-image: url('event.jpg'); background-repeat: no-repeat;">
-            <!-- Blurred overlay for text readability -->
-            <div class="absolute inset-0 bg-black bg-opacity-30 "></div>
-            
-            <!-- Location pin -->
-            <!--<div class="absolute top-4 left-4 z-10">
-              <div class="bg-red-600 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-            </div>-->
-            
-            <!-- Date/time with improved visibility -->
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-              <div class="text-xs drop-shadow-md">9 am</div>
-            </div>
-          </div>
-          
-          <!-- Content area with improved text visibility -->
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Event: Spiritually Reborn & Healthy Lives
-              </h3>
-              <a href="#" class="text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">
-                Event Details
-              </a>
-            </div>
-          </div>
+          <h3 class="text-xl font-bold mb-2">PHONE NUMBERS</h3>
+          <p class="text-sm opacity-90">+254 123456789</p>
+          <p class="text-sm opacity-90">+254 123456789</p>
         </div>
 
-       
+        <!-- Email & Address Card -->
+        <div class="relative overflow-hidden rounded-lg text-center">
+          <!-- Blurred background image -->
+          <div class="absolute inset-0 z-0">
+            <img src="logo.jpg" 
+                 alt="Background" class="object-cover w-full h-full filter blur-sm">
+            <div class="absolute inset-0 bg-slate-800/20"></div>
+          </div>
+          
+          <!-- Content -->
+          <div class="relative z-10 bg-slate-700/20 p-8 text-white backdrop-blur-sm">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" 
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">EMAIL & ADDRESS</h3>
+            <p class="text-sm opacity-50">aicsabaki@gmail.com</p>
+            <p class="text-sm opacity-90">P.O. Box ---, Athi River</p>
+          </div>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Call to Action Section -->
-  <section class="bg-red-600 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">Join Us for Our Upcoming Events</h2>
-      <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-        Experience the joy of fellowship and spiritual growth through our various church events and activities.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
-        <button class="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded font-medium transition-colors">
-          VIEW CALENDAR
-        </button>
-        <button class="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 rounded font-medium transition-colors">
-          CONTACT US
-        </button>
+  <!-- Contact Form & Image Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        
+        <!-- Contact Form -->
+        <div class="bg-white p-8 rounded-lg shadow-lg" data-aos="fade-right">
+          <form action="https://formspree.io/f/xgvlpong" method="POST" class="space-y-6" id="contact-form">
+            <div>
+              <input 
+                type="text" 
+                name="name"
+                placeholder="Name" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"
+                required
+              >
+            </div>
+            <div>
+              <input 
+                type="email" 
+                name="email"
+                placeholder="Email" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"
+                required
+              >
+            </div>
+            <div>
+              <input 
+                type="tel" 
+                name="phone"
+                placeholder="Phone" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"
+              >
+            </div>
+            <div>
+              <textarea 
+                name="message"
+                placeholder="Message" 
+                rows="6" 
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600 resize-none"
+                required
+              ></textarea>
+            </div>
+            <!-- Added to specify recipient email -->
+            <input type="hidden" name="_to" value="m.m.tsecret28@gmail.com">
+            <input type="hidden" name="_subject" value="New Contact Form Submission from AIC Sabaki Website">
+            <button 
+              type="submit" 
+              class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+            >
+              SEND MESSAGE
+            </button>
+          </form>
+        </div>
+
+        <!-- Communion Image -->
+        <div class="flex items-center justify-center" data-aos="fade-left">
+          <img 
+            src="logo2.jpg" 
+            alt="Communion" 
+            class="rounded-lg shadow-lg w-full h-auto max-w-md"
+          >
+        </div>
+
       </div>
     </div>
   </section>
+
+  <!-- Map Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto" data-aos="fade-up">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6084700699575!2d36.96249253805568!3d-1.411035234853109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f75e54647dcd3%3A0xca1c0d32ba5cd71!2sAIC%20Sabaki%20Church!5e0!3m2!1sen!2ske!4v1756939641247!5m2!1sen!2ske" 
+            width="100%" 
+            height="400" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="w-full"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white py-12">
@@ -361,7 +337,7 @@
           <ul class="space-y-2 text-gray-400">
             <li>Along Church Road, Sabaki</li>
             <li>Athi River, Kenya</li>
-            <!--<li>Phone: (555) 123-4567</li>-->
+            <!--<li>Phone:  123-4567</li>-->
             <li>Email: aicsabaki@gmail.com</li>
           </ul>
         </div>
@@ -378,5 +354,51 @@
   
   <!-- Custom JavaScript -->
   <script src="events.js"></script>
+  <script> 
+      document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      let isMenuOpen = false;
+
+      // Toggle mobile menu
+      mobileMenuButton.addEventListener('click', function() {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+          mobileMenu.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+
+      // Hide mobile menu on scroll
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', function() {
+        if (isMenuOpen && window.scrollY > lastScrollY) {
+          // Scrolling down - hide menu
+          mobileMenu.classList.add('hidden');
+          isMenuOpen = false;
+        }
+        lastScrollY = window.scrollY;
+      });
+
+      // Close menu when clicking on a link
+      const menuLinks = mobileMenu.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+          isMenuOpen = false;
+        });
+      });
+
+      // JavaScript for form submission feedback
+      const form = document.getElementById('contact-form');
+      
+      form.addEventListener('submit', function(e) {
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.textContent = 'SENDING...';
+        submitButton.disabled = true;
+      });
+    });
+  </script>
 </body>
 </html>
