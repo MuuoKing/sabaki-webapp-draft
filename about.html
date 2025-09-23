@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - AIC Sabaki</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#dc2626',
+            'primary-dark': '#b91c1c',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hero-section {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1513326738677-b964603b136d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .event-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Modal Animation Styles */
+    .modal-overlay {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      transform: scale(0.8) translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .blur-background {
+      filter: blur(0px);
+      transition: filter 0.3s ease;
+    }
+
+    .blur-background.blurred {
+      filter: blur(5px);
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Main Content Wrapper -->
+  <div id="main-content" class="blur-background">
+    <!-- Header -->
+    <header class="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto rounded-xl bg-black/50 backdrop-filter backdrop-blur-lg transition-all duration-300" id="header">
+      <div class="container mx-auto px-4">
+        <!-- Top bar -->
+        <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
+          <div class="flex items-center">
+            <img 
+              src="https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" 
+              alt="AIC Sabaki Logo"
+              class="h-14 w-14 object-cover rounded-full mr-3"
+            >
+            <span class="text-white text-2xl font-bold">AIC SABAKI</span>
+          </div>
+          <div class="hidden sm:flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 md:w-4 md:h-4">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="text-xs md:text-sm">Along Church Road, Sabaki, Athi-River, Kenya</span>
+          </div>
+        </div>
+
+        <!-- Main navigation -->
+        <nav class="flex justify-between items-center py-4">
+          <div class="flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </div>
+          <div class="hidden md:flex items-center gap-3">
+            <a href="home.html" class="text-white hover:text-red-400 transition-colors">HOME</a>
+            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+            <a href="ministries.html" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
+            <a href="sermons.html" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+            <a href="events.html" class="text-red-400 hover:text-white transition-colors">EVENTS</a>
+            <a href="announcements.html" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
+            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded">OFFERING</button>
+          </div>
+          <button class="md:hidden text-white" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" x2="21" y1="6" y2="6"></line>
+              <line x1="3" x2="21" y1="12" y2="12"></line>
+              <line x1="3" x2="21" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </nav>
+        
+        <!-- Mobile menu -->
+        <div class="md:hidden bg-black/50 backdrop-filter backdrop-blur-lg rounded-xl p-4 absolute left-0 right-0 mt-2 border border-white/20 transition-all duration-300 hidden" id="mobile-menu">
+          <div class="flex flex-col gap-4">
+            <a href="home.html" class="text-white hover:text-red-400 transition-colors">HOME</a>
+            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+            <a href="ministries.html" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
+            <a href="sermons.html" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+            <a href="events.html" class="text-red-400 hover:text-white transition-colors">EVENTS</a>
+            <a href="announcements.html" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
+            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERINGS</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative py-32">
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative z-10 text-center text-white">
+        <div class="container mx-auto px-4">
+          <!-- Breadcrumb -->
+          <nav class="mb-8" data-aos="fade-up">
+            <div class="flex justify-center items-center gap-2 text-sm">
+              <a href="home.html" class="text-red-400 hover:text-white transition-colors">Home</a>
+              <span class="text-gray-300">></span>
+              <span class="text-white">Events</span>
+            </div>
+          </nav>
+          
+          <!-- Page Title -->
+          <h1 class="text-5xl md:text-6xl font-bold mb-8" data-aos="fade-up" data-aos-delay="200">Events</h1>
+          
+          <!-- Church Logo -->
+          <div class="flex justify-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L12 22M2 12L22 12"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Grid Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Event Card 1 -->
+          <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+              <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
+                <div class="text-sm font-bold drop-shadow-md">Dec 25</div>
+                <div class="text-xs drop-shadow-md">9:00 AM</div>
+              </div>
+            </div>
+            
+            <div class="p-6 relative">
+              <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
+              <div class="relative z-10">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+                  Christmas Celebration Service
+                </h3>
+                <button 
+                  class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
+                  data-event-title="Christmas Celebration Service"
+                  data-event-date="December 25, 2024"
+                  data-event-time="9:00 AM - 12:00 PM"
+                  data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
+                  data-event-description="Join us for a special Christmas celebration service filled with worship, carols, and the message of hope. This event brings together our church family to celebrate the birth of Jesus Christ with joyful singing, inspiring messages, and fellowship."
+                >
+                  Event Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+              <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
+                <div class="text-sm font-bold drop-shadow-md">Jan 1</div>
+                <div class="text-xs drop-shadow-md">6:00 AM</div>
+              </div>
+            </div>
+            
+            <div class="p-6 relative">
+              <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
+              <div class="relative z-10">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+                  New Year Prayer Service
+                </h3>
+                <button 
+                  class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
+                  data-event-title="New Year Prayer Service"
+                  data-event-date="January 1, 2025"
+                  data-event-time="6:00 AM - 8:00 AM"
+                  data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
+                  data-event-description="Start the new year with prayer and thanksgiving. Join us for an early morning prayer service where we'll dedicate the coming year to God, seek His guidance, and thank Him for His faithfulness. This is a powerful way to begin your year in God's presence."
+                >
+                  Event Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+              <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
+                <div class="text-sm font-bold drop-shadow-md">Jan 15</div>
+                <div class="text-xs drop-shadow-md">2:00 PM</div>
+              </div>
+            </div>
+            
+            <div class="p-6 relative">
+              <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
+              <div class="relative z-10">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+                  Youth Fellowship Meeting
+                </h3>
+                <button 
+                  class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
+                  data-event-title="Youth Fellowship Meeting"
+                  data-event-date="January 15, 2025"
+                  data-event-time="2:00 PM - 5:00 PM"
+                  data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
+                  data-event-description="Young people come together for fellowship, games, and spiritual growth activities. This event is designed specifically for youth aged 13-25 to connect, grow in faith, and build meaningful relationships. There will be worship, Bible study, team-building activities, and refreshments."
+                >
+                  Event Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="bg-red-600 text-white py-16">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">Join Us for Our Upcoming Events</h2>
+        <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          Experience the joy of fellowship and spiritual growth through our various church events and activities.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+          <button id="viewCalendarBtn" class="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded font-medium transition-colors">
+            VIEW CALENDAR
+          </button>
+          <button id="contactUsBtn" class="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 rounded font-medium transition-colors">
+            CONTACT US
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <span class="text-2xl font-bold text-red-600">AIC Sabaki</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              A place of worship, fellowship, and spiritual growth.
+            </p>
+            <div class="flex gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="sermons.html" class="hover:text-white transition-colors">Sermons</a></li>
+              <li><a href="events.html" class="hover:text-white transition-colors">Events</a></li>
+              <li><a href="ministries.html" class="hover:text-white transition-colors">Ministries</a></li>
+              <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-bold mb-4">Service Times</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li>Sunday: 9:00 AM & 11:00 AM</li>
+              <li>Wednesday: 7:00 PM</li>
+              <li>Friday: 7:30 PM</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-bold mb-4">Contact Info</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li>Along Church Road, Sabaki</li>
+              <li>Athi River, Kenya</li>
+              <li>Email: aicsabaki@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+          <p>© 2025 AIC Sabaki Church. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Event Details Modal -->
+  <div id="eventModal" class="modal-overlay fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+    <div class="modal-content bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-6 border-b border-gray-200">
+        <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Event Details</h2>
+        <button id="closeModal" class="text-gray-500 hover:text-gray-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" x2="6" y1="6" y2="18"></line>
+            <line x1="6" x2="18" y1="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Event Information -->
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Event Information</h3>
+              <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" x2="16" y1="2" y2="6"></line>
+                    <line x1="8" x2="8" y1="2" y2="6"></line>
+                    <line x1="3" x2="21" y1="10" y2="10"></line>
+                  </svg>
+                  <div>
+                    <p class="font-medium text-gray-700">Date</p>
+                    <p id="modalDate" class="text-gray-600">December 25, 2024</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12,6 12,12 16,14"></polyline>
+                  </svg>
+                  <div>
+                    <p class="font-medium text-gray-700">Time</p>
+                    <p id="modalTime" class="text-gray-600">9:00 AM - 12:00 PM</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <div>
+                    <p class="font-medium text-gray-700">Location</p>
+                    <p id="modalLocation" class="text-gray-600">AIC Sabaki Church</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
+              <p id="modalDescription" class="text-gray-600 leading-relaxed">
+                Join us for this special event at AIC Sabaki Church.
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-4">
+              <button id="addToCalendarBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" x2="16" y1="2" y2="6"></line>
+                  <line x1="8" x2="8" y1="2" y2="6"></line>
+                  <line x1="3" x2="21" y1="10" y2="10"></line>
+                </svg>
+                Add to Calendar
+              </button>
+              <button id="shareEventBtn" class="border border-red-600 text-red-600 hover:bg-red-50 px-6 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16,6 12,2 8,6"></polyline>
+                  <line x1="12" x2="12" y1="2" y2="15"></line>
+                </svg>
+                Share Event
+              </button>
+            </div>
+          </div>
+
+          <!-- QR Code Section -->
+          <div class="flex flex-col items-center justify-center">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Event QR Code</h3>
+            <div class="bg-white p-4 rounded-lg border-2 border-gray-200 shadow-sm">
+              <canvas id="qrcode" width="200" height="200"></canvas>
+            </div>
+            <p class="text-sm text-gray-500 mt-3 text-center">
+              Scan to save event details to your device
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true
+      });
+
+      // Modal functionality
+      const modal = document.getElementById('eventModal');
+      const mainContent = document.getElementById('main-content');
+      const closeModalBtn = document.getElementById('closeModal');
+      const eventDetailsBtns = document.querySelectorAll('.event-details-btn');
+      const addToCalendarBtn = document.getElementById('addToCalendarBtn');
+      const shareEventBtn = document.getElementById('shareEventBtn');
+      const viewCalendarBtn = document.getElementById('viewCalendarBtn');
+      const contactUsBtn = document.getElementById('contactUsBtn');
+
+      // Function to open modal
+      function openModal(eventData) {
+        // Update modal content
+        document.getElementById('modalTitle').textContent = eventData.title;
+        document.getElementById('modalDate').textContent = eventData.date;
+        document.getElementById('modalTime').textContent = eventData.time;
+        document.getElementById('modalLocation').textContent = eventData.location;
+        document.getElementById('modalDescription').textContent = eventData.description;
+
+        // Generate QR code with safety check
+        const canvas = document.getElementById('qrcode');
+        if (canvas) {
+          const context = canvas.getContext('2d');
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Check if QRCode library is available
+          if (typeof QRCode !== 'undefined') {
+            const qrData = `Event: ${eventData.title}\nDate: ${eventData.date}\nTime: ${eventData.time}\nLocation: ${eventData.location}\nDescription: ${eventData.description}`;
+            
+            QRCode.toCanvas(canvas, qrData, {
+              width: 200,
+              height: 200,
+              colorDark: '#dc2626',
+              colorLight: '#ffffff',
+              margin: 2
+            }, function (error) {
+              if (error) {
+                console.error('QR Code generation error:', error);
+                showQRCodeError(context, canvas);
+              }
+            });
+          } else {
+            showQRCodeError(context, canvas);
+          }
+        }
+
+        // Set up calendar and share functionality for this event
+        setupEventActions(eventData);
+
+        // Show modal with animation
+        modal.classList.add('active');
+        if (mainContent) mainContent.classList.add('blurred');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Function to show QR code error
+      function showQRCodeError(context, canvas) {
+        context.fillStyle = '#f3f4f6';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = '#dc2626';
+        context.font = '14px Arial';
+        context.textAlign = 'center';
+        context.fillText('QR Code Feature', canvas.width/2, canvas.height/2 - 10);
+        context.fillText('Not Available', canvas.width/2, canvas.height/2 + 10);
+      }
+
+      // Function to close modal
+      function closeModal() {
+        modal.classList.remove('active');
+        if (mainContent) mainContent.classList.remove('blurred');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Set up calendar and share functionality
+      function setupEventActions(eventData) {
+        // Add to Calendar functionality
+        if (addToCalendarBtn) {
+          addToCalendarBtn.onclick = function() {
+            // Simple date parsing for ICS format
+            const dateStr = eventData.date;
+            const timeRange = eventData.time.split(' - ');
+            const startTime = timeRange[0];
+            const endTime = timeRange[1];
+            
+            // Create a simple date string for demonstration
+            const icsContent = [
+              'BEGIN:VCALENDAR',
+              'VERSION:2.0',
+              'BEGIN:VEVENT',
+              `SUMMARY:${eventData.title}`,
+              `DTSTART:20241225T090000`, // Simplified for demo
+              `DTEND:20241225T120000`,   // Simplified for demo
+              `LOCATION:${eventData.location}`,
+              `DESCRIPTION:${eventData.description}`,
+              'END:VEVENT',
+              'END:VCALENDAR'
+            ].join('\r\n');
+            
+            // Download ICS file
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${eventData.title.replace(/\s+/g, '_')}.ics`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+          };
+        }
+
+        // Share Event functionality
+        if (shareEventBtn) {
+          shareEventBtn.onclick = function() {
+            const shareText = `Join us for ${eventData.title} on ${eventData.date} at ${eventData.time}. ${eventData.description}`;
+            
+            if (navigator.share) {
+              // Use Web Share API if available
+              navigator.share({
+                title: eventData.title,
+                text: shareText,
+                url: window.location.href
+              }).catch(err => {
+                console.log('Error sharing:', err);
+                fallbackShare(shareText);
+              });
+            } else {
+              // Fallback for browsers that don't support Web Share API
+              fallbackShare(shareText);
+            }
+          };
+
+          function fallbackShare(text) {
+            // Copy to clipboard as fallback
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(text).then(() => {
+                alert('Event details copied to clipboard!');
+              }).catch(err => {
+                // Final fallback - show text in alert
+                alert(`Share this event:\n\n${text}`);
+              });
+            } else {
+              // Final fallback - show text in alert
+              alert(`Share this event:\n\n${text}`);
+            }
+          }
+        }
+      }
+
+      // Event listeners for event detail buttons
+      eventDetailsBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const eventData = {
+            title: this.getAttribute('data-event-title'),
+            date: this.getAttribute('data-event-date'),
+            time: this.getAttribute('data-event-time'),
+            location: this.getAttribute('data-event-location'),
+            description: this.getAttribute('data-event-description')
+          };
+          
+          openModal(eventData);
+        });
+      });
+
+      // Close modal event listeners
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+      }
+
+      // Close modal when clicking outside
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+      // Mobile menu functionality
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (mobileMenu && !mobileMenu.contains(e.target) && e.target !== mobileMenuButton && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      }
+
+      // Fix for anchor links that don't exist
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          
+          // Only prevent default if the target doesn't exist
+          if (href === '#' || !document.querySelector(href)) {
+            e.preventDefault();
+          }
+        });
+      });
+
+      // Smooth scrolling for existing anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          
+          if (href !== '#' && document.querySelector(href)) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+        });
+      });
+
+      // Header scroll effect
+      const header = document.getElementById('header');
+      if (header) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 100) {
+            header.classList.add('bg-black/80');
+            header.classList.remove('bg-black/50');
+          } else {
+            header.classList.remove('bg-black/80');
+            header.classList.add('bg-black/50');
+          }
+        });
+      }
+
+      // CTA button functionality
+      if (viewCalendarBtn) {
+        viewCalendarBtn.addEventListener('click', function() {
+          alert('Calendar view would open here. This is a demo feature.');
+        });
+      }
+
+      if (contactUsBtn) {
+        contactUsBtn.addEventListener('click', function() {
+          window.location.href = 'contact.html';
+        });
+      }
+
+      // Offering button functionality
+      const offeringButtons = document.querySelectorAll('.bg-red-600');
+      offeringButtons.forEach(button => {
+        if (button.textContent.includes('OFFERING')) {
+          button.addEventListener('click', function() {
+            alert('Offering portal would open here. This is a demo feature.');
+          });
+        }
+      });
+
+      console.log('AIC Sabaki Events page loaded successfully!');
+    });
+  </script>
+</body>
+</html>
