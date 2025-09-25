@@ -69,7 +69,7 @@
   const modal = document.getElementById('eventModal');
   const mainContent = document.getElementById('main-content');
   const closeModalBtn = document.getElementById('closeModal');
-  const eventDetailsBtns = document.querySelectorAll('.event-details-btn');
+  const eventDetailsBtns = document.querySelectorAll('.event-details3-btn');
   const addToCalendarBtn = document.getElementById('addToCalendarBtn');
   const shareEventBtn = document.getElementById('shareEventBtn');
   const viewCalendarBtn = document.getElementById('viewCalendarBtn');
