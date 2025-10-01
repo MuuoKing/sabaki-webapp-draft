@@ -89,6 +89,65 @@
     .blur-background.blurred {
       filter: blur(5px);
     }
+
+        /* Calendar Modal Styles */
+        .calendar-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .calendar-modal.active {
+      display: flex;
+    }
+    
+    .calendar-content {
+      background: white;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .calendar-option {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .calendar-option:hover {
+      background-color: #f9fafb;
+      border-color: #d1d5db;
+    }
+    
+    .calendar-option img {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="font-sans">
@@ -220,9 +279,9 @@
               </div>-->
               
               <!-- Date/time  -->
-              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
+              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-1 rounded backdrop-blur-sm">
                 <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-                <div class="text-xs drop-shadow-md">9 am</div>
+                <div class="text-xs drop-shadow-md">9:00 am</div>
               </div>
             </div>
             
@@ -258,9 +317,9 @@
             </div>-->
             
             <!-- Date/time with improved visibility -->
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
+            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-1 rounded backdrop-blur-sm">
               <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-              <div class="text-xs drop-shadow-md">9 am</div>
+              <div class="text-xs drop-shadow-md">9:00 am</div>
             </div>
           </div>
           
@@ -296,9 +355,9 @@
             </div>-->
             
             <!-- Date/time with improved visibility -->
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
+            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-1 rounded backdrop-blur-sm">
               <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-              <div class="text-xs drop-shadow-md">9 am</div>
+              <div class="text-xs drop-shadow-md">9:00 am</div>
             </div>
           </div>
           
@@ -318,7 +377,7 @@
 
         <!-- Event Card 3 -->
         <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+          <div class="relative h-64 bg-cover bg-center" style="background-image: url('logo2.jpg')">
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
             <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
               <div class="text-sm font-bold drop-shadow-md">Jan 15</div>
@@ -338,7 +397,7 @@
                 data-event-date="January 15, 2025"
                 data-event-time="2:00 PM - 5:00 PM"
                 data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                data-event-description="Young people come together for fellowship, games, and spiritual growth activities. This event is designed specifically for youth aged 13-25 to connect, grow in faith, and build meaningful relationships. There will be worship, Bible study, team-building activities, and refreshments."
+                data-event-description="Young people come together for fellowship, games, and spiritual growth activities. This event is designed specifically for youth aged 18-35 to connect, grow in faith, and build meaningful relationships. There will be worship, Bible study, team-building activities, and refreshments."
               >
                 Event Details
               </button>
@@ -536,6 +595,31 @@
       </div>
     </div>
   </div>
+
+   <!-- Calendar Modal -->
+ <div id="calendarModal" class="calendar-modal">
+  <div class="calendar-content">
+    <button class="close-modal" id="closeCalendarModal">&times;</button>
+    <h2 class="text-xl font-bold mb-4">Add to Calendar</h2>
+    <p class="text-gray-600 mb-4">Choose your preferred calendar application:</p>
+    
+    <div class="calendar-option" id="googleCalendar">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg" alt="Google Calendar">
+      <div>
+        <div class="font-medium">Google Calendar</div>
+        <div class="text-sm text-gray-500">Add to your Google Calendar</div>
+      </div>
+    </div>
+    
+    <div class="calendar-option" id="outlookCalendar">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg" alt="Outlook Calendar">
+      <div>
+        <div class="font-medium">Outlook Calendar</div>
+        <div class="text-sm text-gray-500">Add to your Outlook Calendar</div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- AOS Animation Library -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
