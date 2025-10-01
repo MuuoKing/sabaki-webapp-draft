@@ -1,975 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Events - AIC Sabaki</title>
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- AOS Animation Library -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'primary': '#dc2626',
-            'primary-dark': '#b91c1c',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministries All</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-      }
-    }
-  </script>
-  <style>
-    .hero-section {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('logo.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .event-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .event-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-    
-    .event-image-1 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-2 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-3 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-4 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-5 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
-    
-    .event-image-6 {
-      background-image: url('/placeholder.svg?height=300&width=400');
-    }
 
-    /* Modal Animation Styles */
-    .modal-overlay {
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    .modal-content {
-      transform: scale(0.8) translateY(20px);
-      transition: all 0.3s ease;
-    }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
 
-    .modal-overlay.active .modal-content {
-      transform: scale(1) translateY(0);
-    }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
 
-    .blur-background {
-      filter: blur(0px);
-      transition: filter 0.3s ease;
-    }
+        .animate-scale-in {
+            animation: scaleIn 0.5s ease-out forwards;
+        }
 
-    .blur-background.blurred {
-      filter: blur(5px);
-    }
-    
-    /* Calendar Modal Styles */
-    .calendar-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .calendar-modal.active {
-      display: flex;
-    }
-    
-    .calendar-content {
-      background: white;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 500px;
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .calendar-option {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .calendar-option:hover {
-      background-color: #f9fafb;
-      border-color: #d1d5db;
-    }
-    
-    .calendar-option img {
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-    }
-    
-    .close-modal {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-    }
-  </style>
+        .ministry-card {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .ministry-card.visible {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .ministry-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 15px 20px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            transition: all 0.4s ease;
+        }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .ministry-card:hover .image-container img {
+            filter: blur(4px);
+            transform: scale(1.05);
+        }
+
+        .ministry-card:hover .image-container::after {
+            opacity: 1;
+        }
+
+        .read-more-link {
+            position: relative;
+            display: inline-block;
+        }
+
+        .read-more-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #dc2626;
+            transition: width 0.3s ease;
+        }
+
+        .read-more-link:hover::after {
+            width: 100%;
+        }
+
+        .cross-icon {
+            animation: scaleIn 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .view-all-btn {
+            transition: all 0.3s ease;
+        }
+
+        .view-all-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+        }
+    </style>
 </head>
-<body class="font-sans">
-  <!-- Header -->
-  <header class="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto rounded-xl bg-black/50 backdrop-filter backdrop-blur-lg transition-all duration-300" id="header">
-    <div class="container mx-auto px-4">
-        <!-- Top bar -->
-        <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
-          <div class="flex items-center">
-              <!-- Made logo and text smaller on mobile -->
-              <img 
-                src="aic.png" 
-                alt="AIC Sabaki Logo"
-                class="h-14 w-14 object-cover rounded-full mr-3"
-              >
-              <span class="text-white text-2xl font-bold">AIC SABAKI</span>
-            </div>
-          <!-- Made location text smaller and hide on very small screens -->
-          <div class="hidden sm:flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 md:w-4 md:h-4">
-              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span class="text-xs md:text-sm">Along Church Road, Sabaki, Athi-River, Kenya</span>
-          </div>
-          
-        </div>
-  
-        <!-- Main navigation -->
-        <nav class="flex justify-between items-center py-4">
-          <div class="flex gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
-                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-              </svg>
-            </div>
-          <div class="hidden md:flex items-center gap-3">
-            <a href="index.html" class="text-white hover:text-red-400 transition-colors">HOME</a>
-            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
-            <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
-            <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
-            <a href="events.html" class="text-red-400 hover:text-white transition-colors">EVENTS</a>
-            <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
-            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
-            <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded">OFFERING</button>
-          </div>
-          <button class="md:hidden text-white" id="mobile-menu-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" x2="21" y1="6" y2="6"></line>
-              <line x1="3" x2="21" y1="12" y2="12"></line>
-              <line x1="3" x2="21" y1="18" y2="18"></line>
-            </svg>
-          </button>
-        </nav>
-        
-        <!-- Mobile menu (hidden by default) -->
-        <div class="md:hidden hidden bg-black/50 backdrop-filter backdrop-blur-lg rounded-xl p-4 absolute left-0 right-0 mt-2 border border-white/20 transition-all duration-300" id="mobile-menu">
-          <div class="flex flex-col gap-4">
-            <a href="index.html" class="text-white hover:text-red-400 transition-colors">HOME</a>
-            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
-            <a href="#ministries" class="text-white hover:text-red-400 transition-colors">MINISTRIES</a>
-            <a href="#sermons" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
-            <a href="events.html" class="text-red-400 hover:text-white transition-colors">EVENTS</a>
-            <a href="#announcements" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
-            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
-            <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERINGS</button>
-          </div>
-        </div>
-      </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero-section relative py-32">
-    <div class="absolute inset-0 bg-black/60"></div>
-    <div class="relative z-10 text-center text-white">
-      <div class="container mx-auto px-4">
-        <!-- Breadcrumb -->
-        <nav class="mb-8" data-aos="fade-up">
-          <div class="flex justify-center items-center gap-2 text-sm">
-            <a href="home.html" class="text-red-400 hover:text-white transition-colors">Home</a>
-            <span class="text-gray-300">></span>
-            <span class="text-white">Events</span>
-          </div>
-        </nav>
-        
-        <!-- Page Title -->
-        <h1 class="text-5xl md:text-6xl font-bold mb-8" data-aos="fade-up" data-aos-delay="200">Events</h1>
-        
-        <!-- Church Logo -->
-        <div class="flex justify-center" data-aos="fade-up" data-aos-delay="400">
-          <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2L12 22M2 12L22 12"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Events Grid Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- Event Card 1 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
-            <!-- Background container with blurred overlay -->
-            <div class="relative h-64 bg-cover bg-center" style="background-image: url('event2.jpg')">
-              <!-- Blurred overlay for text readability -->
-              <div class="absolute inset-0 bg-black bg-opacity-30 "></div>
-              
-              <!-- Date/time  -->
-              <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-                <div class="text-sm font-bold drop-shadow-md">Dec 18</div>
-                <div class="text-xs drop-shadow-md">9 am</div>
-              </div>
-            </div>
+<body class="bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-[#2c3e50] text-white py-12 animate-fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Breadcrumb -->
+            <nav class="text-sm mb-4">
+                <a href="/" class="text-red-500 hover:text-red-400 transition-colors">Home</a>
+                <span class="mx-2">></span>
+                <span class="text-gray-300">Ministries All</span>
+            </nav>
             
-            <div class="p-6 relative">
-              <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-              <div class="relative z-10">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                  Event: Spiritually Reborn & Healthy Lives
-                </h3>
-                <button 
-                  class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
-                  data-event-title="Spiritually Reborn & Healthy Lives"
-                  data-event-date="December 18, 2024"
-                  data-event-time="9:00 AM - 12:00 PM"
-                  data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                  data-event-description="Join us for this special event focused on spiritual rebirth and healthy living. This event will explore the connection between spiritual wellness and physical health, featuring guest speakers, worship, and practical workshops."
-                >
-                  Event Details
-                </button>
-              </div>
-            </div>
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl font-bold text-center">Ministries All</h1>
         </div>
+    </header>
 
-        <!-- Event Card 2 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
-          <!-- Background container with blurred overlay -->
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('event1.jpg')">
-            <!-- Blurred overlay for text readability -->
-            <div class="absolute inset-0 bg-black bg-opacity-30 "></div>
-            
-            <!-- Date/time with improved visibility -->
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Dec 25</div>
-              <div class="text-xs drop-shadow-md">10 am</div>
-            </div>
-          </div>
-          
-          <!-- Content area with improved text visibility -->
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Christmas Day Service
-              </h3>
-              <button 
-                class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
-                data-event-title="Christmas Day Service"
-                data-event-date="December 25, 2024"
-                data-event-time="10:00 AM - 1:00 PM"
-                data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                data-event-description="Celebrate the birth of Jesus Christ with our special Christmas Day service. This joyful event will include carol singing, a special message from our pastor, and a community fellowship with refreshments. All are welcome to join this celebration of hope and love."
-              >
-                Event Details
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Card 3 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Jan 15</div>
-              <div class="text-xs drop-shadow-md">2:00 PM</div>
-            </div>
-          </div>
-          
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Youth Fellowship Meeting
-              </h3>
-              <button 
-                class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
-                data-event-title="Youth Fellowship Meeting"
-                data-event-date="January 15, 2025"
-                data-event-time="2:00 PM - 5:00 PM"
-                data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                data-event-description="Young people come together for fellowship, games, and spiritual growth activities. This event is designed specifically for youth aged 13-25 to connect, grow in faith, and build meaningful relationships. There will be worship, Bible study, team-building activities, and refreshments."
-              >
-                Event Details
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Card 4 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Feb 5</div>
-              <div class="text-xs drop-shadow-md">7:00 PM</div>
-            </div>
-          </div>
-          
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Prayer & Fasting Night
-              </h3>
-              <button 
-                class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
-                data-event-title="Prayer & Fasting Night"
-                data-event-date="February 5, 2025"
-                data-event-time="7:00 PM - 9:00 PM"
-                data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                data-event-description="Join us for a powerful night of prayer and fasting as we seek God's guidance and blessings for the new year. This special service will include worship, testimonies, and focused prayer for our church, community, and nation."
-              >
-                Event Details
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Card 5 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="500">
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Mar 12</div>
-              <div class="text-xs drop-shadow-md">10:00 AM</div>
-            </div>
-          </div>
-          
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Women's Ministry Conference
-              </h3>
-              <button 
-                class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
-                data-event-title="Women's Ministry Conference"
-                data-event-date="March 12, 2025"
-                data-event-time="10:00 AM - 4:00 PM"
-                data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                data-event-description="A special conference for women of all ages focusing on spiritual growth, fellowship, and empowerment. The event will feature guest speakers, workshops, worship, and opportunities for connection and support among women in our church community."
-              >
-                Event Details
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Card 6 -->
-        <div class="event-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="600">
-          <div class="relative h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-2 rounded backdrop-blur-sm">
-              <div class="text-sm font-bold drop-shadow-md">Apr 20</div>
-              <div class="text-xs drop-shadow-md">6:00 PM</div>
-            </div>
-          </div>
-          
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
-            <div class="relative z-10">
-              <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Easter Celebration Concert
-              </h3>
-              <button 
-                class="event-details-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
-                data-event-title="Easter Celebration Concert"
-                data-event-date="April 20, 2025"
-                data-event-time="6:00 PM - 8:30 PM"
-                data-event-location="AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya"
-                data-event-description="Celebrate the resurrection of Jesus Christ with our special Easter concert featuring our church choir, guest musicians, and powerful worship. This family-friendly event will include special performances, a message of hope, and fellowship after the service."
-              >
-                Event Details
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  
-  <!-- Call to Action Section -->
-  <section class="bg-red-600 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="fade-up">Join Us for Our Upcoming Events</h2>
-      <p class="text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-        Experience the joy of fellowship and spiritual growth through our various church events and activities.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
-        <button class="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded font-medium transition-colors">
-          VIEW CALENDAR
-        </button>
-        <button class="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 rounded font-medium transition-colors">
-          CONTACT US
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <div class="flex items-center mb-4">
-            <span class="text-2xl font-bold text-red-600">AIC Sabaki</span>
-          </div>
-          <p class="text-gray-400 mb-4">
-            ....
-          </p>
-          <div class="flex gap-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+    <!-- Cross Icon -->
+    <div class="flex justify-center -mt-8 relative z-10">
+        <div class="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center shadow-lg cross-icon">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path>
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
-              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-            </svg>
-          </div>
         </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
-            <li><a href="sermons.html" class="hover:text-white transition-colors">Sermons</a></li>
-            <li><a href="events.html" class="hover:text-white transition-colors">Events</a></li>
-            <li><a href="ministries.html" class="hover:text-white transition-colors">Ministries</a></li>
-            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4">Service Times</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li>Sunday: 9:00 AM & 11:00 AM</li>
-            <li>Wednesday: 7:00 PM</li>
-            <li>Friday: 7:30 PM</li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4">Contact Info</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li>Along Church Road, Sabaki</li>
-            <li>Athi River, Kenya</li>
-            <!--<li>Phone: (555) 123-4567</li>-->
-            <li>Email: aicsabaki@gmail.com</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-        <p>© 2025 AIC Sabaki Church. All rights reserved.</p>
-      </div>
-    </div>
- </footer>
-
- <!-- Event Details Modal -->
- <div id="eventModal" class="modal-overlay fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-  <div class="modal-content bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-    <!-- Modal Header -->
-    <div class="flex justify-between items-center p-6 border-b border-gray-200">
-      <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Event Details</h2>
-      <button id="closeModal" class="text-gray-500 hover:text-gray-700 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" x2="6" y1="6" y2="18"></line>
-          <line x1="6" x2="18" y1="6" y2="18"></line>
-        </svg>
-      </button>
     </div>
 
-    <!-- Modal Content -->
-    <div class="p-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Event Information -->
-        <div class="space-y-4">
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">Event Information</h3>
-            <div class="space-y-3">
-              <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" x2="16" y1="2" y2="6"></line>
-                  <line x1="8" x2="8" y1="2" y2="6"></line>
-                  <line x1="3" x2="21" y1="10" y2="10"></line>
-                </svg>
-                <div>
-                  <p class="font-medium text-gray-700">Date</p>
-                  <p id="modalDate" class="text-gray-600">December 25, 2024</p>
+    <!-- Ministries Grid -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Web Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="0">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&h=250&fit=crop" 
+                         alt="Web Ministry" 
+                         class="w-full h-48 object-cover">
                 </div>
-              </div>
-
-              <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12,6 12,12 16,14"></polyline>
-                </svg>
-                <div>
-                  <p class="font-medium text-gray-700">Time</p>
-                  <p id="modalTime" class="text-gray-600">9:00 AM - 12:00 PM</p>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Web Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Children's ministry is the most important ministry in our church. This ministry helps kids learn about the
+                    </p>
+                    <a href="/web-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
                 </div>
-              </div>
-
-              <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-                <div>
-                  <p class="font-medium text-gray-700">Location</p>
-                  <p id="modalLocation" class="text-gray-600">AIC Sabaki Church</p>
-                </div>
-              </div>
             </div>
-          </div>
 
-          <div>
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
-            <p id="modalDescription" class="text-gray-600 leading-relaxed">
-              Join us for this special event at AIC Sabaki Church.
-            </p>
-          </div>
+            <!-- Help Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="100">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&h=250&fit=crop" 
+                         alt="Help Ministry" 
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Help Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Children's ministry is the most important ministry in our church. This ministry helps kids learn about the
+                    </p>
+                    <a href="/help-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
 
-          <!-- Action Buttons -->
-          <div class="flex flex-col sm:flex-row gap-3 pt-4">
-            <button id="modalAddToCalendarBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" x2="16" y1="2" y2="6"></line>
-                <line x1="8" x2="8" y1="2" y2="6"></line>
-                <line x1="3" x2="21" y1="10" y2="10"></line>
-              </svg>
-              Add to Calendar
-            </button>
-            <button id="modalShareEventBtn" class="border border-red-600 text-red-600 hover:bg-red-50 px-6 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16,6 12,2 8,6"></polyline>
-                <line x1="12" x2="12" y1="2" y2="15"></line>
-              </svg>
-              Share Event
-            </button>
-          </div>
+            <!-- Prison Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="200">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=400&h=250&fit=crop" 
+                         alt="Prison Ministry" 
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Prison Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Children's ministry is the most important ministry in our church. This ministry helps kids learn about the
+                    </p>
+                    <a href="/prison-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Family Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="300">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=250&fit=crop" 
+                         alt="Family Ministry" 
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Family Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Children's ministry is the most important ministry in our church. This ministry helps kids learn about the
+                    </p>
+                    <a href="/family-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Music Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="400">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop" 
+                         alt="Music Ministry" 
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Music Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Children's ministry is the most important ministry in our church. This ministry helps kids learn about the
+                    </p>
+                    <a href="/music-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Global Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="500">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=250&fit=crop" 
+                         alt="Global Ministry" 
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Global Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Children's ministry is the most important ministry in our church. This ministry helps kids learn about the
+                    </p>
+                    <a href="/global-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!-- QR Code Section -->
-        <div class="flex flex-col items-center justify-center">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Event QR Code</h3>
-          <div class="bg-white p-4 rounded-lg border-2 border-gray-200 shadow-sm">
-            <canvas id="qrcode" width="200" height="200"></canvas>
-          </div>
-          <p class="text-sm text-gray-500 mt-3 text-center">
-            Scan to save event details to your device
-          </p>
+        <!-- View All Button -->
+        <div class="text-center">
+            <a href="/all-ministries" 
+               class="view-all-btn inline-block bg-red-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-red-700">
+                View All Ministries
+            </a>
         </div>
-      </div>
-    </div>
-  </div>
- </div>
+    </main>
 
- <!-- Calendar Modal -->
- <div id="calendarModal" class="calendar-modal">
-   <div class="calendar-content">
-     <button class="close-modal" id="closeCalendarModal">&times;</button>
-     <h2 class="text-xl font-bold mb-4">Add to Calendar</h2>
-     <p class="text-gray-600 mb-4">Choose your preferred calendar application:</p>
-     
-     <div class="calendar-option" id="googleCalendar">
-       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg" alt="Google Calendar">
-       <div>
-         <div class="font-medium">Google Calendar</div>
-         <div class="text-sm text-gray-500">Add to your Google Calendar</div>
-       </div>
-     </div>
-     
-     <div class="calendar-option" id="outlookCalendar">
-       <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg" alt="Outlook Calendar">
-       <div>
-         <div class="font-medium">Outlook Calendar</div>
-         <div class="text-sm text-gray-500">Add to your Outlook Calendar</div>
-       </div>
-     </div>
-     
-     <div class="calendar-option" id="appleCalendar">
-       <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Apple_Calendar_icon.png" alt="Apple Calendar">
-       <div>
-         <div class="font-medium">Apple Calendar</div>
-         <div class="text-sm text-gray-500">Add to your Apple Calendar</div>
-       </div>
-     </div>
-     
-     <div class="calendar-option" id="icsDownload">
-       <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/ICS_Calendar_icon.png" alt="ICS File">
-       <div>
-         <div class="font-medium">Download ICS File</div>
-         <div class="text-sm text-gray-500">Import to any calendar application</div>
-       </div>
-     </div>
-   </div>
- </div>
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
- <!-- AOS Animation Library -->
- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
- 
- <!-- Custom JavaScript -->
- <script>
-   // Initialize AOS
-   AOS.init({
-     duration: 800,
-     once: true,
-     offset: 100
-   });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-   // Mobile menu functionality
-   const mobileMenuButton = document.getElementById('mobile-menu-button');
-   const mobileMenu = document.getElementById('mobile-menu');
-   
-   mobileMenuButton.addEventListener('click', () => {
-     mobileMenu.classList.toggle('hidden');
-   });
+        // Observe all ministry cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.ministry-card');
+            cards.forEach(card => observer.observe(card));
 
-   // Event Details Modal Functionality
-   const eventModal = document.getElementById('eventModal');
-   const closeModalBtn = document.getElementById('closeModal');
-   const eventDetailsBtns = document.querySelectorAll('.event-details-btn');
-   
-   // Current event data for calendar integration
-   let currentEventData = null;
-   
-   // Open event modal when clicking event details button
-   eventDetailsBtns.forEach(btn => {
-     btn.addEventListener('click', function() {
-       const eventTitle = this.getAttribute('data-event-title');
-       const eventDate = this.getAttribute('data-event-date');
-       const eventTime = this.getAttribute('data-event-time');
-       const eventLocation = this.getAttribute('data-event-location');
-       const eventDescription = this.getAttribute('data-event-description');
-       
-       // Store current event data for calendar integration
-       currentEventData = {
-         title: eventTitle,
-         date: eventDate,
-         time: eventTime,
-         location: eventLocation,
-         description: eventDescription
-       };
-       
-       // Update modal content
-       document.getElementById('modalTitle').textContent = eventTitle;
-       document.getElementById('modalDate').textContent = eventDate;
-       document.getElementById('modalTime').textContent = eventTime;
-       document.getElementById('modalLocation').textContent = eventLocation;
-       document.getElementById('modalDescription').textContent = eventDescription;
-       
-       // Generate QR code
-       generateQRCode(eventTitle, eventDate, eventTime, eventLocation);
-       
-       // Show modal
-       eventModal.classList.add('active');
-       document.body.classList.add('blurred');
-     });
-   });
-   
-   // Close event modal
-   closeModalBtn.addEventListener('click', () => {
-     eventModal.classList.remove('active');
-     document.body.classList.remove('blurred');
-   });
-   
-   // Close modal when clicking outside
-   eventModal.addEventListener('click', (e) => {
-     if (e.target === eventModal) {
-       eventModal.classList.remove('active');
-       document.body.classList.remove('blurred');
-     }
-   });
-   
-   // Generate QR Code function
-   function generateQRCode(title, date, time, location) {
-     const canvas = document.getElementById('qrcode');
-     const ctx = canvas.getContext('2d');
-     
-     // Clear canvas
-     ctx.clearRect(0, 0, canvas.width, canvas.height);
-     
-     // Create QR code data
-     const qrData = `Event: ${title}\nDate: ${date}\nTime: ${time}\nLocation: ${location}`;
-     
-     // Simple QR code implementation (in a real app, you'd use a library like qrcode.js)
-     ctx.fillStyle = '#ffffff';
-     ctx.fillRect(0, 0, canvas.width, canvas.height);
-     
-     // Draw a simple placeholder QR code
-     ctx.fillStyle = '#000000';
-     ctx.font = '12px Arial';
-     ctx.textAlign = 'center';
-     ctx.fillText('QR Code', canvas.width/2, canvas.height/2 - 10);
-     ctx.font = '10px Arial';
-     ctx.fillText('(Placeholder)', canvas.width/2, canvas.height/2 + 10);
-     
-     // In a real implementation, you would use:
-     // QRCode.toCanvas(canvas, qrData, function (error) {
-     //   if (error) console.error(error);
-     // });
-   }
-   
-   // Calendar Modal Functionality
-   const calendarModal = document.getElementById('calendarModal');
-   const closeCalendarModal = document.getElementById('closeCalendarModal');
-   const modalAddToCalendarBtn = document.getElementById('modalAddToCalendarBtn');
-   
-   // Open calendar modal when clicking "Add to Calendar" button in event modal
-   modalAddToCalendarBtn.addEventListener('click', () => {
-     if (currentEventData) {
-       calendarModal.classList.add('active');
-     }
-   });
-   
-   // Close calendar modal
-   closeCalendarModal.addEventListener('click', () => {
-     calendarModal.classList.remove('active');
-   });
-   
-   // Close calendar modal when clicking outside
-   calendarModal.addEventListener('click', (e) => {
-     if (e.target === calendarModal) {
-       calendarModal.classList.remove('active');
-     }
-   });
-   
-   // Calendar option functionality
-   document.getElementById('googleCalendar').addEventListener('click', () => {
-     if (currentEventData) {
-       addToGoogleCalendar(currentEventData);
-       calendarModal.classList.remove('active');
-     }
-   });
-   
-   document.getElementById('outlookCalendar').addEventListener('click', () => {
-     if (currentEventData) {
-       addToOutlookCalendar(currentEventData);
-       calendarModal.classList.remove('active');
-     }
-   });
-   
-   document.getElementById('appleCalendar').addEventListener('click', () => {
-     if (currentEventData) {
-       downloadICSFile(currentEventData);
-       calendarModal.classList.remove('active');
-     }
-   });
-   
-   document.getElementById('icsDownload').addEventListener('click', () => {
-     if (currentEventData) {
-       downloadICSFile(currentEventData);
-       calendarModal.classList.remove('active');
-     }
-   });
-   
-   // Function to add event to Google Calendar
-   function addToGoogleCalendar(eventData) {
-     // Parse date and time
-     const dateParts = eventData.date.split(' ');
-     const month = getMonthNumber(dateParts[0]);
-     const day = dateParts[1].replace(',', '');
-     const year = dateParts[2];
-     
-     const timeParts = eventData.time.split(' - ')[0].split(' ');
-     const time = timeParts[0];
-     const period = timeParts[1];
-     
-     // Create start and end dates (assuming 3-hour duration)
-     const startDate = new Date(`${month} ${day}, ${year} ${time} ${period}`);
-     const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3 hours later
-     
-     // Format dates for Google Calendar URL
-     const formatDate = (date) => {
-       return date.toISOString().replace(/-|:|\.\d+/g, '');
-     };
-     
-     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventData.title)}&dates=${formatDate(startDate)}/${formatDate(endDate)}&details=${encodeURIComponent(eventData.description)}&location=${encodeURIComponent(eventData.location)}`;
-     
-     window.open(googleCalendarUrl, '_blank');
-   }
-   
-   // Function to add event to Outlook Calendar
-   function addToOutlookCalendar(eventData) {
-     // Parse date and time
-     const dateParts = eventData.date.split(' ');
-     const month = getMonthNumber(dateParts[0]);
-     const day = dateParts[1].replace(',', '');
-     const year = dateParts[2];
-     
-     const timeParts = eventData.time.split(' - ')[0].split(' ');
-     const time = timeParts[0];
-     const period = timeParts[1];
-     
-     // Create start and end dates (assuming 3-hour duration)
-     const startDate = new Date(`${month} ${day}, ${year} ${time} ${period}`);
-     const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3 hours later
-     
-     // Format dates for Outlook URL
-     const formatDate = (date) => {
-       return date.toISOString().replace(/-|:|\.\d+/g, '');
-     };
-     
-     const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(eventData.title)}&startdt=${formatDate(startDate)}&enddt=${formatDate(endDate)}&body=${encodeURIComponent(eventData.description)}&location=${encodeURIComponent(eventData.location)}`;
-     
-     window.open(outlookCalendarUrl, '_blank');
-   }
-   
-   // Function to download ICS file
-   function downloadICSFile(eventData) {
-     // Parse date and time
-     const dateParts = eventData.date.split(' ');
-     const month = getMonthNumber(dateParts[0]);
-     const day = dateParts[1].replace(',', '');
-     const year = dateParts[2];
-     
-     const timeParts = eventData.time.split(' - ')[0].split(' ');
-     const time = timeParts[0];
-     const period = timeParts[1];
-     
-     // Create start and end dates (assuming 3-hour duration)
-     const startDate = new Date(`${month} ${day}, ${year} ${time} ${period}`);
-     const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3 hours later
-     
-     // Format dates for ICS file
-     const formatDate = (date) => {
-       return date.toISOString().replace(/-|:|\.\d+/g, '').slice(0, -1) + 'Z';
-     };
-     
-     const icsContent = `BEGIN:VCALENDAR
- VERSION:2.0
- CALSCALE:GREGORIAN
- BEGIN:VEVENT
- SUMMARY:${eventData.title}
- DTSTART:${formatDate(startDate)}
- DTEND:${formatDate(endDate)}
- DESCRIPTION:${eventData.description}
- LOCATION:${eventData.location}
- END:VEVENT
- END:VCALENDAR`;
-     
-     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-     const url = URL.createObjectURL(blob);
-     
-     const link = document.createElement('a');
-     link.href = url;
-     link.setAttribute('download', `${eventData.title.replace(/\s+/g, '-').toLowerCase()}.ics`);
-     document.body.appendChild(link);
-     link.click();
-     document.body.removeChild(link);
-   }
-   
-   // Helper function to get month number from month name
-   function getMonthNumber(monthName) {
-     const months = {
-       'January': '01', 'February': '02', 'March': '03', 'April': '04',
-       'May': '05', 'June': '06', 'July': '07', 'August': '08',
-       'September': '09', 'October': '10', 'November': '11', 'December': '12'
-     };
-     return months[monthName] || '01';
-   }
-   
-   // Share Event functionality
-   const modalShareEventBtn = document.getElementById('modalShareEventBtn');
-   
-   modalShareEventBtn.addEventListener('click', () => {
-     if (currentEventData) {
-       if (navigator.share) {
-         navigator.share({
-           title: currentEventData.title,
-           text: currentEventData.description,
-           url: window.location.href,
-         })
-         .catch((error) => console.log('Error sharing', error));
-       } else {
-         // Fallback for browsers that don't support the Web Share API
-         const eventDetails = `${currentEventData.title}\nDate: ${currentEventData.date}\nTime: ${currentEventData.time}\nLocation: ${currentEventData.location}\n\n${currentEventData.description}`;
-         
-         navigator.clipboard.writeText(eventDetails)
-           .then(() => {
-             alert('Event details copied to clipboard!');
-           })
-           .catch(err => {
-             console.error('Failed to copy: ', err);
-             // Fallback to showing the text in an alert
-             alert(`Event Details:\n\n${eventDetails}`);
-           });
-       }
-     }
-   });
- </script>
+            // Add click tracking for analytics (optional)
+            const readMoreLinks = document.querySelectorAll('.read-more-link');
+            readMoreLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    console.log('[v0] Navigating to:', e.target.href);
+                });
+            });
+        });
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

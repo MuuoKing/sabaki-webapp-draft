@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ministries - AIC Sabaki</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#dc2626',
+            'primary-dark': '#b91c1c',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hero-section {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('logo.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 0.5s ease-out forwards;
+    }
+
+    .ministry-card {
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .ministry-card.visible {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .ministry-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 15px 20px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      transition: all 0.4s ease;
+    }
+
+    .image-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .ministry-card:hover .image-container img {
+      filter: blur(4px);
+      transform: scale(1.05);
+    }
+
+    .ministry-card:hover .image-container::after {
+      opacity: 1;
+    }
+
+    .read-more-link {
+      position: relative;
+      display: inline-block;
+    }
+
+    .read-more-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #dc2626;
+      transition: width 0.3s ease;
+    }
+
+    .read-more-link:hover::after {
+      width: 100%;
+    }
+
+    .cross-icon {
+      animation: scaleIn 0.8s ease-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    .view-all-btn {
+      transition: all 0.3s ease;
+    }
+
+    .view-all-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Header -->
+  <header class="fixed top-4 left-4 right-4 z-50 max-w-7xl mx-auto rounded-xl bg-black/50 backdrop-filter backdrop-blur-lg transition-all duration-300" id="header">
+    <div class="container mx-auto px-4">
+        <!-- Top bar -->
+        <div class="flex justify-between items-center py-2 text-white text-sm border-b border-white/20">
+          <div class="flex items-center">
+              <!-- Made logo and text smaller on mobile -->
+              <img 
+                src="aic.png" 
+                alt="AIC Sabaki Logo"
+                class="h-14 w-14 object-cover rounded-full mr-3"
+              >
+              <span class="text-white text-2xl font-bold">AIC SABAKI</span>
+            </div>
+          <!-- Made location text smaller and hide on very small screens -->
+          <div class="hidden sm:flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 md:w-4 md:h-4">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="text-xs md:text-sm">Along Church Road, Sabaki, Athi-River, Kenya</span>
+          </div>
+          
+        </div>
+  
+        <!-- Main navigation -->
+        <nav class="flex justify-between items-center py-4">
+          <div class="flex gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 cursor-pointer hover:text-red-400">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>
+            </div>
+          <div class="hidden md:flex items-center gap-3">
+            <a href="index.html" class="text-white hover:text-red-400 transition-colors">HOME</a>
+            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+            <a href="ministries.html" class="text-red-400 hover:text-white transition-colors">MINISTRIES</a>
+            <a href="sermons.html" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+            <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
+            <a href="announcements.html" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
+            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded">OFFERING</button>
+          </div>
+          <button class="md:hidden text-white" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" x2="21" y1="6" y2="6"></line>
+              <line x1="3" x2="21" y1="12" y2="12"></line>
+              <line x1="3" x2="21" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </nav>
+        
+        <!-- Mobile menu (hidden by default) -->
+        <div class="md:hidden hidden bg-black/50 backdrop-filter backdrop-blur-lg rounded-xl p-4 absolute left-0 right-0 mt-2 border border-white/20 transition-all duration-300" id="mobile-menu">
+          <div class="flex flex-col gap-4">
+            <a href="index.html" class="text-white hover:text-red-400 transition-colors">HOME</a>
+            <a href="about.html" class="text-white hover:text-red-400 transition-colors">ABOUT</a>
+            <a href="ministries.html" class="text-red-400 hover:text-white transition-colors">MINISTRIES</a>
+            <a href="sermons.html" class="text-white hover:text-red-400 transition-colors">SERMONS</a>
+            <a href="events.html" class="text-white hover:text-red-400 transition-colors">EVENTS</a>
+            <a href="announcements.html" class="text-white hover:text-red-400 transition-colors">NOTICES</a>
+            <a href="contact.html" class="text-white hover:text-red-400 transition-colors">CONTACT US</a>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">OFFERINGS</button>
+          </div>
+        </div>
+      </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section relative py-32 pt-40">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 text-center text-white">
+      <div class="container mx-auto px-4">
+        <!-- Breadcrumb -->
+        <nav class="mb-8" data-aos="fade-up">
+          <div class="flex justify-center items-center gap-2 text-sm">
+            <a href="index.html" class="text-red-400 hover:text-white transition-colors">Home</a>
+            <span class="text-gray-300">></span>
+            <span class="text-white">Ministries</span>
+          </div>
+        </nav>
+        
+        <!-- Page Title -->
+        <h1 class="text-5xl md:text-6xl font-bold mb-8" data-aos="fade-up" data-aos-delay="200">Ministries</h1>
+        
+        <!-- Church Logo -->
+        <div class="flex justify-center" data-aos="fade-up" data-aos-delay="400">
+          <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L12 22M2 12L22 12"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ministries Grid -->
+ <section class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- CMF Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="0">
+                <div class="image-container">
+                        <img src="logo.jpg" 
+                        alt="Christian Men Fellowship" 
+                        class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Christian Men Fellowship</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Our Christian Men Fellowship ministry is dedicated to supporting and empowering men in their faith journey, providing a community for spiritual growth, fellowship, and service.
+                    </p>
+                    <a href="/cmf-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- CWF Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="100">
+                <div class="image-container">
+                    <img src="logo.jpg" 
+                        alt="Christian Women Fellowship" 
+                        class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Christian Women Fellowship</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Our Christian Women Fellowship ministry is dedicated to supporting and empowering women in their faith journey, providing a community for spiritual growth, fellowship, and service.
+                    </p>
+                    <a href="/cwf-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Youth Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="200">
+                <div class="image-container">
+                    <img src="logo.jpg" 
+                        alt="Youth Ministry" 
+                        class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Youth Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Our youth ministry is dedicated to providing a nurturing environment where young people can learn about God's Word and grow in their faith.
+                    </p>
+                    <a href="/youth-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sunday School Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="300">
+                <div class="image-container">
+                    <img src="logo.jpg" 
+                        alt="Sunday School Ministry" 
+                        class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Sunday School</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Our Sunday School ministry is dedicated to providing a nurturing environment where children can learn about God's Word and grow in their faith.
+                    </p>
+                    <a href="/family-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Music Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="400">
+                <div class="image-container">
+                    <img src="logo.jpg" 
+                        alt="Music Ministry" 
+                        class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Music Ministry</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Our music ministry leads worship through various musical expressions, including choir, praise team, and instrumental groups that enhance our worship services.
+                    </p>
+                    <a href="/music-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Catechism Ministry Card -->
+            <div class="ministry-card bg-white rounded-lg overflow-hidden shadow-lg border-b-4 border-red-400" data-delay="500">
+                <div class="image-container">
+                    <img src="logo.jpg" 
+                        alt="Catechism Ministry" 
+                        class="w-full h-48 object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Catechism</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Our catechism ministry is responsible for teaching the Bible to children and youth, ensuring a strong foundation in Christian doctrine and values.
+                    </p>
+                    <a href="/catechism-ministry" class="read-more-link text-red-600 font-semibold hover:text-red-700">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="text-2xl font-bold text-red-600">AIC Sabaki</span>
+          </div>
+          <p class="text-gray-400 mb-4">
+            AIC Sabaki is a vibrant Christian community dedicated to spreading the Gospel, serving our community, and nurturing spiritual growth.
+          </p>
+          <div class="flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
+              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer hover:text-red-400">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="sermons.html" class="hover:text-white transition-colors">Sermons</a></li>
+            <li><a href="events.html" class="hover:text-white transition-colors">Events</a></li>
+            <li><a href="ministries.html" class="hover:text-white transition-colors">Ministries</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">Service Times</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li>Sunday: 9:00 AM & 11:00 AM</li>
+            <li>Wednesday: 7:00 PM</li>
+            <li>Friday: 7:30 PM</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">Contact Info</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li>Along Church Road, Sabaki</li>
+            <li>Athi River, Kenya</li>
+            <!--<li>Phone: (555) 123-4567</li>-->
+            <li>Email: aicsabaki@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+        <p>© 2025 AIC Sabaki Church. All rights reserved.</p>
+      </div>
+    </div>
+ </footer>
+
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+ 
+  <!-- Custom JavaScript -->
+  <script src="ministries.js"> </script>
+</body>
+</html>
