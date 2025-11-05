@@ -27,6 +27,9 @@
       background-position: center;
     }
     
+    .dropdown:hover .dropdown-menu {
+            display: block;
+        }
   </style>
 </head>
 <body class="font-sans">
@@ -353,52 +356,7 @@
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   
   <!-- Custom JavaScript -->
-  <script src="about.js"></script>
-  <script> 
-      document.addEventListener('DOMContentLoaded', function() {
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      let isMenuOpen = false;
+  <script src="contact.js"></script>
 
-      // Toggle mobile menu
-      mobileMenuButton.addEventListener('click', function() {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen) {
-          mobileMenu.classList.remove('hidden');
-        } else {
-          mobileMenu.classList.add('hidden');
-        }
-      });
-
-      // Hide mobile menu on scroll
-      let lastScrollY = window.scrollY;
-      window.addEventListener('scroll', function() {
-        if (isMenuOpen && window.scrollY > lastScrollY) {
-          // Scrolling down - hide menu
-          mobileMenu.classList.add('hidden');
-          isMenuOpen = false;
-        }
-        lastScrollY = window.scrollY;
-      });
-
-      // Close menu when clicking on a link
-      const menuLinks = mobileMenu.querySelectorAll('a');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          isMenuOpen = false;
-        });
-      });
-
-      // JavaScript for form submission feedback
-      const form = document.getElementById('contact-form');
-      
-      form.addEventListener('submit', function(e) {
-        const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.textContent = 'SENDING...';
-        submitButton.disabled = true;
-      });
-    });
-  </script>
 </body>
 </html>
