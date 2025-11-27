@@ -98,6 +98,98 @@ document.querySelectorAll('a[href="#"]').forEach(link => {
   }
 });
 
+//Array for event details
+const eventsData= [
+  {
+  title:"Youth Fellowship Meeting",
+  date:"January 15, 2025",
+  time:"2:00 PM - 5:00 PM",
+  location:"AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya",
+  description:"Young people come together for fellowship, games, and spiritual growth activities. This event is designed specifically for youth aged 18-35 to connect, grow in faith, and build meaningful relationships. There will be worship, Bible study, team-building activities, and refreshments.",
+  image: "logo2.jpg"
+  },{
+    title:"Spiritually Reborn & Healthy Lives",
+    date:"November 24, 2024",
+    time:"2:00 PM - 6:30 PM",
+    location:"AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya",
+    description:"Giving thanks and offer acceptable worship to God.",
+    image: "event2.jpg"
+    }, {
+      title:"Girls & Women Prayer Breakfast",
+      date:"April 6, 2024",
+      time:"6:00 AM - 9:00 AM",
+      location:"AIC Sabaki Church, Along Church Road, Sabaki, Athi-River, Kenya",
+      description:"Theme Verse: 1 John 5:4.",
+      image: "event.jpg"
+      }
+  //More data for events and details to go here
+];
+
+//Function to create th event cards
+function createEventCard(event){
+  //card container
+  const card = document.createElement("div");
+  card.className = "event-card bg-white rounded-lg overflow-hidden shadow-lg";
+  card.setAttribute("data-aos", "fade-up");
+  card.setAttribute("data-aos-delay", "100");
+
+  //inner html structure:
+  card.innerHTML = `
+    <div class="relative h-64 bg-cover bg-center" style="background-image: url('${event.image}')">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="absolute bottom-4 left-4 z-10 bg-red-600/90 text-white px-4 py-1 rounded backdrop-blur-sm">
+          <div class="text-sm font-bold drop-shadow-md">${event.date}</div>
+          <div class="text-xs drop-shadow-md">${event.time}</div>
+        </div>
+    </div>
+    <div class="p-6 relative">
+        <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-0"></div>
+        <div class="relative z-10">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+              ${event.title}
+            </h3>
+            <button
+              class="event-details3-btn text-red-600 hover:text-red-700 font-medium text-sm border-b border-red-600 pb-1 drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)] cursor-pointer"
+              data-event-title="${event.title}"
+              data-event-date="${event.date}"
+              data-event-time="${event.time}"
+              data-event-location="${event.location}"
+              data-event-description="${event.description}"
+            >
+              Event Details
+            </button>
+        </div>
+    </div>
+  `;
+
+return card;
+};
+
+//Function for eventsGrid
+const eventsGrid = document.getElementById("eventsGrid");
+eventsData.forEach(event => {
+  const card = createEventCard(event);
+  eventsGrid.appendChild(card);
+});
+
+// Rebind modal event listeners after adding cards
+document.querySelectorAll('.event-details3-btn').forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const eventData = {
+      title: this.getAttribute('data-event-title'),
+      date: this.getAttribute('data-event-date'),
+      time: this.getAttribute('data-event-time'),
+      location: this.getAttribute('data-event-location'),
+      description: this.getAttribute('data-event-description')
+    };
+
+    openModal(eventData);
+  });
+});
+
+
 // Modal functionality
 const modal = document.getElementById('eventModal');
 const mainContent = document.getElementById('main-content');
